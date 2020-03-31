@@ -43,6 +43,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.321" />
 
+    <Button
+        android:id="@+id/updateAllBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update All"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421" />
 
     <EditText
         android:id="@+id/inputET"

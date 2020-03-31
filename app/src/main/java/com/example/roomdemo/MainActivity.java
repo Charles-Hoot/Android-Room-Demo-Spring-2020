@@ -59,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button updateAllBTN = findViewById(R.id.updateAllBTN);
+        updateAllBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Button", "update all button clicked");
+                threadUpdateAll();
+            }
+        });
+
     }
 
     public void threadInsert(final Cat c){
@@ -128,6 +137,21 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
+                    }
+                }).start();
+    }
+
+    public void threadUpdateAll(){
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        List<Cat> catList = db.catDao().getAll();
+                        for (Cat cat : catList) {
+                            // Got rid of the Log
+                            cat.weight += cat.id;
+                            db.catDao().update(cat);
+                        }
                     }
                 }).start();
     }

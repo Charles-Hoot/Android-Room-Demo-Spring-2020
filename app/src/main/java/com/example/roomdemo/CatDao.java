@@ -16,5 +16,6 @@ public interface CatDao {
     @Query("SELECT * FROM cat_table WHERE name = :lookFor")
     List<Cat> getByName(String lookFor);
 
-
+    @Update
+    public void update(Cat c);
 }
