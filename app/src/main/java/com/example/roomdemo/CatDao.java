@@ -18,4 +18,7 @@ public interface CatDao {
 
     @Update
     public void update(Cat c);
+
+    @Delete
+    public void delete(Cat c);
 }

@@ -68,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button deleteSomeBTN = findViewById(R.id.deleteSomeBTN);
+        deleteSomeBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Button", "delete some button clicked");
+                threadDeleteSome();
+            }
+        });
+
     }
 
     public void threadInsert(final Cat c){
@@ -151,6 +160,19 @@ public class MainActivity extends AppCompatActivity {
                             // Got rid of the Log
                             cat.weight += cat.id;
                             db.catDao().update(cat);
+                        }
+                    }
+                }).start();
+    }
+
+    public void threadDeleteSome(){
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        List<Cat> catList = db.catDao().getByName("Fluff");
+                        for (Cat cat : catList) {
+                            db.catDao().delete(cat);
                         }
                     }
                 }).start();
