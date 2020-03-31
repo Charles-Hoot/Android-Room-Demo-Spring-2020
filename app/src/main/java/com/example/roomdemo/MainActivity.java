@@ -3,6 +3,7 @@ package com.example.roomdemo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -81,9 +82,15 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("DB", piece);
                             result = result + piece + "\n";
                         }
+                        final String built = result;
+                        final TextView resultTV = findViewById(R.id.resultTV);
+                        resultTV.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                resultTV.setText(built);
+                            }
+                        });
 
-                        TextView resultTV = findViewById(R.id.resultTV);
-                        resultTV.setText(result);
                     }
                 }).start();
     }
