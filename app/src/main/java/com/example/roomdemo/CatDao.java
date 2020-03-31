@@ -13,5 +13,8 @@ public interface CatDao {
     @Query("SELECT * FROM cat_table")
     List<Cat> getAll();
 
+    @Query("SELECT * FROM cat_table WHERE name = :lookFor")
+    List<Cat> getByName(String lookFor);
+
 
 }
