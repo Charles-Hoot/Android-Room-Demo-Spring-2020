@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -72,11 +73,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         List<Cat> catList = db.catDao().getAll();
+                        String result = "";
                         for (Cat cat : catList) {
-                            Log.d("DB", "cat: " + cat.id
+                            String piece =  "cat: " + cat.id
                                     + " named " + cat.name
-                                    + " weighs " + cat.weight);
+                                    + " weighs " + cat.weight;
+                            Log.d("DB", piece);
+                            result = result + piece + "\n";
                         }
+
+                        TextView resultTV = findViewById(R.id.resultTV);
+                        resultTV.setText(result);
                     }
                 }).start();
     }
