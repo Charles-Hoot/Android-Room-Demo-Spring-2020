@@ -34,16 +34,26 @@ public class MainActivity extends AppCompatActivity {
                 Cat myCat = new Cat();
                 myCat.name = theName;
                 myCat.weight = 10.0;
-                db.catDao().insert(myCat);
-                List<Cat> catList = db.catDao().getAll();
-                for(Cat cat:catList){
-                    Log.d("DB", "cat: " +cat.id
-                            + " named " + cat.name
-                            + " weighs" + cat.weight);
-                }
+                threadInsert(myCat);
 
             }
         });
 
+    }
+
+    public void threadInsert(final Cat c){
+        new Thread(
+                new Runnable() {
+            @Override
+            public void run() {
+                db.catDao().insert(c);
+                List<Cat> catList = db.catDao().getAll();
+                for (Cat cat : catList) {
+                    Log.d("DB", "cat: " + cat.id
+                            + " named " + cat.name
+                            + " weighs " + cat.weight);
+                }
+            }
+        }).start();
     }
 }
